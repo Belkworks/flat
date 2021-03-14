@@ -189,7 +189,6 @@ do
       end
     end,
     write = function(self)
-      self.Data.credit = nil
       local empty = 0 == #keys(self.Data)
       if empty then
         if isfile(self.Path) then
