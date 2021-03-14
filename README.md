@@ -6,3 +6,15 @@
 ```lua
 Flatfile = NEON:github('belkworks', 'flat')
 ```
+
+## Example
+```lua
+file = Flatfile('test.json')
+
+friends = file:namespace('logs')
+
+friends:set('bob', true)
+friends:set('alice', false)
+
+file:write()
+```
