@@ -4,8 +4,8 @@
 Service = setmetatable {}, __index: (K) => game\GetService K
 
 JSON =
-	parse: Service.HttpService\JSONDecode
-	stringify: Service.HttpService\JSONEncode
+	parse: (s) -> Service.HttpService\JSONDecode s
+	stringify: (o) -> Service.HttpService\JSONEncode o
 
 keys = (t) -> [i for i in pairs t]
 hasKeys = (t, T) ->

@@ -4,20 +4,12 @@ local Service = setmetatable({ }, {
   end
 })
 local JSON = {
-  parse = (function()
-    local _base_0 = Service.HttpService
-    local _fn_0 = _base_0.JSONDecode
-    return function(...)
-      return _fn_0(_base_0, ...)
-    end
-  end)(),
-  stringify = (function()
-    local _base_0 = Service.HttpService
-    local _fn_0 = _base_0.JSONEncode
-    return function(...)
-      return _fn_0(_base_0, ...)
-    end
-  end)()
+  parse = function(s)
+    return Service.HttpService:JSONDecode(s)
+  end,
+  stringify = function(o)
+    return Service.HttpService:JSONEncode(o)
+  end
 }
 local keys
 keys = function(t)
