@@ -26,7 +26,7 @@ class Namespace
 	new: (@File, @Name) =>
 		@Data = @File.Data[@Name] or {}
 
-	prewrite: =>
+	_prewrite: =>
 		if 0 == #keys @Data
 			@File.Data[@Name] = nil
 		else @File.Data[@Name] = @Data
@@ -36,7 +36,7 @@ class Namespace
 			if 'number' != type Key
 				@Data = {}
 		@Data[Key] = Value
-		@prewrite!
+		@_prewrite!
 
 	get: (Key) => @Data[Key]
 
@@ -47,13 +47,13 @@ class Namespace
 		unless isArray @Data
 			@Data = {}
 		table.insert @Data, T
-		@prewrite!
+		@_prewrite!
 
 	pop: =>
 		unless isArray @Data
 			@Data = {}
 		X = table.remove @Data, #@Data
-		@prewrite!
+		@_prewrite!
 		X
 
 	keys: => keys @Data
@@ -63,20 +63,20 @@ class Namespace
 		unless isArray @Data
 			@Data = {}
 		X = table.remove @Data
-		@prewrite!
+		@_prewrite!
 		X
 
 	unshift: (T) =>
 		unless isArray @Data
 			@Data = {}
 		table.insert @Data, 1, T
-		@prewrite!
+		@_prewrite!
 
 	delete: =>
 		@Data = {}
-		@prewrite!
+		@_prewrite!
 
-	setState: (@Data) =>
+	setState: (@Data) => @_prewrite!
 	getState: => @Data
 
 class Flatfile

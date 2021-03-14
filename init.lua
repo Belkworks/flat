@@ -61,7 +61,7 @@ local Namespace
 do
   local _class_0
   local _base_0 = {
-    prewrite = function(self)
+    _prewrite = function(self)
       if 0 == #keys(self.Data) then
         self.File.Data[self.Name] = nil
       else
@@ -75,7 +75,7 @@ do
         end
       end
       self.Data[Key] = Value
-      return self:prewrite()
+      return self:_prewrite()
     end,
     get = function(self, Key)
       return self.Data[Key]
@@ -99,14 +99,14 @@ do
         self.Data = { }
       end
       table.insert(self.Data, T)
-      return self:prewrite()
+      return self:_prewrite()
     end,
     pop = function(self)
       if not (isArray(self.Data)) then
         self.Data = { }
       end
       local X = table.remove(self.Data, #self.Data)
-      self:prewrite()
+      self:_prewrite()
       return X
     end,
     keys = function(self)
@@ -120,7 +120,7 @@ do
         self.Data = { }
       end
       local X = table.remove(self.Data)
-      self:prewrite()
+      self:_prewrite()
       return X
     end,
     unshift = function(self, T)
@@ -128,14 +128,15 @@ do
         self.Data = { }
       end
       table.insert(self.Data, 1, T)
-      return self:prewrite()
+      return self:_prewrite()
     end,
     delete = function(self)
       self.Data = { }
-      return self:prewrite()
+      return self:_prewrite()
     end,
     setState = function(self, Data)
       self.Data = Data
+      return self:_prewrite()
     end,
     getState = function(self)
       return self.Data
