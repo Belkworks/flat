@@ -16,5 +16,5 @@ friends = file:namespace('logs')
 friends:set('bob', true)
 friends:set('alice', false)
 
-file:write()
+friends:write()
 ```
